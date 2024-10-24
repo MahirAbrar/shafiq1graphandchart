@@ -2,7 +2,7 @@
   "name": "shafiq",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://MahirAbrar.github.io/shafiq1graphandchart",
+  "homepage": "https://mahirabrar.github.io/shafiq1graphandchart",
   "dependencies": {
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.1.0",
