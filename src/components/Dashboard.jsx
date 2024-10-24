@@ -179,6 +179,8 @@ const Dashboard = () => {
     );
   };
 
+  // text darker
+  // bar width shorten
   return (
     <div className="space-y-4">
       <Card>
@@ -194,15 +196,26 @@ const Dashboard = () => {
               <BarChart data={skillsData}>
                 <XAxis
                   dataKey="name"
-                  angle={-30}
+                  angle={-20}
                   textAnchor="end"
                   height={100}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
+                  }}
                 />
                 <YAxis
                   label={{
                     value: "Percentage (%)",
                     angle: -90,
                     position: "insideLeft",
+                    fill: "#0f172a",
+                  }}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
                   }}
                 />
                 <Tooltip />
@@ -229,15 +242,26 @@ const Dashboard = () => {
               <BarChart data={materialsData}>
                 <XAxis
                   dataKey="name"
-                  angle={-45}
+                  angle={-20}
                   textAnchor="end"
                   height={100}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
+                  }}
                 />
                 <YAxis
                   label={{
                     value: "Percentage (%)",
                     angle: -90,
                     position: "insideLeft",
+                    fill: "#0f172a",
+                  }}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
                   }}
                 />
                 <Tooltip />
@@ -263,6 +287,11 @@ const Dashboard = () => {
                 <XAxis
                   dataKey="name"
                   label={{ value: "Number of Sheets", position: "bottom" }}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
+                  }}
                 />
                 <Label
                   value="Tarpaulin Sheets"
@@ -279,6 +308,12 @@ const Dashboard = () => {
                     value: "Percentage (%)",
                     angle: -90,
                     position: "insideLeft",
+                    fill: "#0f172a",
+                  }}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
                   }}
                 />
                 <Tooltip />
@@ -314,12 +349,23 @@ const Dashboard = () => {
                 <XAxis
                   dataKey="name"
                   label={{ value: "Number of Pieces", position: "bottom" }}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
+                  }}
                 />
                 <YAxis
                   label={{
                     value: "Percentage (%)",
                     angle: -90,
                     position: "insideLeft",
+                    fill: "#0f172a",
+                  }}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
                   }}
                 />
                 <Tooltip />
@@ -345,7 +391,15 @@ const Dashboard = () => {
                 data={muliBambooData}
                 margin={{ top: 20, right: 30, left: 20, bottom: 40 }}
               >
-                <XAxis dataKey="name" tickMargin={10}>
+                <XAxis
+                  dataKey="name"
+                  tickMargin={10}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
+                  }}
+                >
                   <Label
                     value="Number of Pieces of Muli Bamboo"
                     position="bottom"
@@ -353,7 +407,7 @@ const Dashboard = () => {
                     style={{
                       textAnchor: "middle",
                       fontSize: "14px",
-                      fill: "#666666",
+                      fill: "#0f172a",
                     }}
                   />
                 </XAxis>
@@ -362,6 +416,12 @@ const Dashboard = () => {
                     value: "Percentage (%)",
                     angle: -90,
                     position: "insideLeft",
+                    fill: "#0f172a",
+                  }}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
                   }}
                 />
                 <Tooltip />
@@ -387,7 +447,15 @@ const Dashboard = () => {
                 data={wireData}
                 margin={{ top: 20, right: 30, left: 20, bottom: 40 }}
               >
-                <XAxis dataKey="name" tickMargin={10}>
+                <XAxis
+                  dataKey="name"
+                  tickMargin={10}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
+                  }}
+                >
                   <Label
                     value="Wire (kg)"
                     position="bottom"
@@ -395,7 +463,7 @@ const Dashboard = () => {
                     style={{
                       textAnchor: "middle",
                       fontSize: "14px",
-                      fill: "#666666",
+                      fill: "#0f172a",
                     }}
                   />
                 </XAxis>
@@ -404,6 +472,12 @@ const Dashboard = () => {
                     value: "Percentage (%)",
                     angle: -90,
                     position: "insideLeft",
+                    fill: "#0f172a",
+                  }}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
                   }}
                 />
                 <Tooltip />
@@ -429,7 +503,15 @@ const Dashboard = () => {
                 data={ropeData}
                 margin={{ top: 20, right: 30, left: 20, bottom: 40 }}
               >
-                <XAxis dataKey="name" tickMargin={10}>
+                <XAxis
+                  dataKey="name"
+                  tickMargin={10}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
+                  }}
+                >
                   <Label
                     value="Rope (kg)"
                     position="bottom"
@@ -437,7 +519,7 @@ const Dashboard = () => {
                     style={{
                       textAnchor: "middle",
                       fontSize: "14px",
-                      fill: "#666666",
+                      fill: "#0f172a",
                     }}
                   />
                 </XAxis>
@@ -446,6 +528,12 @@ const Dashboard = () => {
                     value: "Percentage (%)",
                     angle: -90,
                     position: "insideLeft",
+                    fill: "#0f172a",
+                  }}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
                   }}
                 />
                 <Tooltip />
@@ -471,7 +559,15 @@ const Dashboard = () => {
                 data={sandbagData}
                 margin={{ top: 20, right: 30, left: 20, bottom: 40 }}
               >
-                <XAxis dataKey="name" tickMargin={10}>
+                <XAxis
+                  dataKey="name"
+                  tickMargin={10}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
+                  }}
+                >
                   <Label
                     value="Sandbag (nos)"
                     position="bottom"
@@ -479,7 +575,7 @@ const Dashboard = () => {
                     style={{
                       textAnchor: "middle",
                       fontSize: "14px",
-                      fill: "#666666",
+                      fill: "#0f172a",
                     }}
                   />
                 </XAxis>
@@ -488,6 +584,12 @@ const Dashboard = () => {
                     value: "Percentage (%)",
                     angle: -90,
                     position: "insideLeft",
+                    fill: "#0f172a",
+                  }}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
                   }}
                 />
                 <Tooltip />
@@ -547,12 +649,25 @@ const Dashboard = () => {
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={householdToolkitData}>
-                <XAxis dataKey="name" />
+                <XAxis
+                  dataKey="name"
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
+                  }}
+                />
                 <YAxis
                   label={{
                     value: "Percentage (%)",
                     angle: -90,
                     position: "insideLeft",
+                    fill: "#0f172a",
+                  }}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
                   }}
                 />
                 <Tooltip />
@@ -576,12 +691,25 @@ const Dashboard = () => {
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={communityToolkitData}>
-                <XAxis dataKey="name" />
+                <XAxis
+                  dataKey="name"
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
+                  }}
+                />
                 <YAxis
                   label={{
                     value: "Percentage (%)",
                     angle: -90,
                     position: "insideLeft",
+                    fill: "#0f172a",
+                  }}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "12px",
+                    fontWeight: 500,
                   }}
                 />
                 <Tooltip />
