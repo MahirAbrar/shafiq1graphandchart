@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/shafiq1graphandchart/static/css/main.36191e89.css",
+    "main.js": "/shafiq1graphandchart/static/js/main.143f7325.js",
+    "static/js/453.cc45dabb.chunk.js": "/shafiq1graphandchart/static/js/453.cc45dabb.chunk.js",
+    "index.html": "/shafiq1graphandchart/index.html",
+    "main.36191e89.css.map": "/shafiq1graphandchart/static/css/main.36191e89.css.map",
+    "main.143f7325.js.map": "/shafiq1graphandchart/static/js/main.143f7325.js.map",
+    "453.cc45dabb.chunk.js.map": "/shafiq1graphandchart/static/js/453.cc45dabb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.36191e89.css",
+    "static/js/main.143f7325.js"
+  ]
+}
