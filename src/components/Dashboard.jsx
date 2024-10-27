@@ -182,7 +182,7 @@ const Dashboard = () => {
   // text darker
   // bar width shorten
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 ">
       <Card>
         <CardHeader>
           <CardTitle>
@@ -191,18 +191,18 @@ const Dashboard = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-80">
+          <div className="h-[500px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={skillsData}>
+              <BarChart data={skillsData} margin={{ left: 40, bottom: 10 }}>
                 <XAxis
                   dataKey="name"
                   angle={-20}
                   textAnchor="end"
-                  height={100}
+                  height={85}
                   tick={{
                     fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
+                    fontSize: "18px",
+                    fontWeight: 700,
                   }}
                 />
                 <YAxis
@@ -211,11 +211,13 @@ const Dashboard = () => {
                     angle: -90,
                     position: "insideLeft",
                     fill: "#0f172a",
+                    fontSize: "17px",
+                    fontWeight: 700,
                   }}
                   tick={{
                     fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
+                    fontSize: "18px",
+                    fontWeight: 700,
                   }}
                 />
                 <Tooltip />
@@ -237,18 +239,18 @@ const Dashboard = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-80">
+          <div className="h-[500px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={materialsData}>
+              <BarChart data={materialsData} margin={{ left: 40 }}>
                 <XAxis
                   dataKey="name"
-                  angle={-20}
+                  angle={-30}
                   textAnchor="end"
-                  height={100}
+                  height={80}
                   tick={{
                     fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
+                    fontSize: "18px",
+                    fontWeight: 700,
                   }}
                 />
                 <YAxis
@@ -257,11 +259,13 @@ const Dashboard = () => {
                     angle: -90,
                     position: "insideLeft",
                     fill: "#0f172a",
+                    fontSize: "17px",
+                    fontWeight: 700,
                   }}
                   tick={{
                     fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
+                    fontSize: "18px",
+                    fontWeight: 700,
                   }}
                 />
                 <Tooltip />
@@ -276,53 +280,66 @@ const Dashboard = () => {
         </CardContent>
       </Card>
 
+      {/* Tarpaulin */}
       <Card>
         <CardHeader>
           <CardTitle>Tarpaulin Sheet Distribution Preference</CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="h-80">
+        <CardContent className="p-6">
+          <div className="h-[500px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={tarpaulinData}>
-                <XAxis
-                  dataKey="name"
-                  label={{ value: "Number of Sheets", position: "bottom" }}
-                  tick={{
-                    fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
-                  }}
-                />
-                <Label
-                  value="Tarpaulin Sheets"
-                  position="bottom"
-                  offset={10} // Distance from axis
-                  style={{
-                    textAnchor: "middle",
-                    fontSize: "14px",
-                    fill: "#666666",
-                  }}
-                />
-                <YAxis
-                  label={{
-                    value: "Percentage (%)",
-                    angle: -90,
-                    position: "insideLeft",
-                    fill: "#0f172a",
-                  }}
-                  tick={{
-                    fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
-                  }}
-                />
-                <Tooltip />
-                <Bar
+              <PieChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                <Pie
+                  data={tarpaulinData}
                   dataKey="value"
-                  fill={COLORS.distribution.tarpaulin}
-                  label={renderCustomizedLabel}
-                />
-              </BarChart>
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={180}
+                  label={(props) => {
+                    const RADIAN = Math.PI / 180;
+                    const { cx, cy, midAngle, outerRadius, value, name } =
+                      props;
+                    const radius = outerRadius * 1.2;
+                    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+                    return (
+                      <text
+                        x={x}
+                        y={y}
+                        fill="#0f172a"
+                        style={{
+                          fontSize: 19,
+                          fontWeight: 700,
+                        }}
+                        textAnchor={x > cx ? "start" : "end"}
+                        dominantBaseline="central"
+                      >
+                        {`${name} sheets: ${value}%`}
+                      </text>
+                    );
+                  }}
+                  labelLine
+                >
+                  {tarpaulinData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={
+                        [
+                          "#0891b2", // Base cyan
+                          "#0e7490", // Slightly darker
+                          "#155e75", // Darker
+                          "#164e63", // Even darker
+                          "#083344", // Very dark
+                          "#042f2e", // Darkest
+                        ][index % 6]
+                      }
+                    />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
             </ResponsiveContainer>
           </div>
         </CardContent>
@@ -332,49 +349,61 @@ const Dashboard = () => {
         <CardHeader>
           <CardTitle>Borak Bamboo Distribution Preference</CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="h-80">
+        <CardContent className="p-6">
+          <div className="h-[500px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={borakBambooData}>
-                <Label
-                  value="Borak Bamboo Pieces"
-                  position="bottom"
-                  offset={10} // Distance from axis
-                  style={{
-                    textAnchor: "middle",
-                    fontSize: "14px",
-                    fill: "#666666",
-                  }}
-                />
-                <XAxis
-                  dataKey="name"
-                  label={{ value: "Number of Pieces", position: "bottom" }}
-                  tick={{
-                    fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
-                  }}
-                />
-                <YAxis
-                  label={{
-                    value: "Percentage (%)",
-                    angle: -90,
-                    position: "insideLeft",
-                    fill: "#0f172a",
-                  }}
-                  tick={{
-                    fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
-                  }}
-                />
-                <Tooltip />
-                <Bar
+              <PieChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                <Pie
+                  data={borakBambooData}
                   dataKey="value"
-                  fill={COLORS.distribution.borak}
-                  label={renderCustomizedLabel}
-                />
-              </BarChart>
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={180}
+                  label={(props) => {
+                    const RADIAN = Math.PI / 180;
+                    const { cx, cy, midAngle, outerRadius, value, name } =
+                      props;
+                    const radius = outerRadius * 1.2;
+                    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+                    return (
+                      <text
+                        x={x}
+                        y={y}
+                        fill="#0f172a"
+                        style={{
+                          fontSize: 19,
+                          fontWeight: 700,
+                        }}
+                        textAnchor={x > cx ? "start" : "end"}
+                        dominantBaseline="central"
+                      >
+                        {`${name} pieces: ${value}%`}
+                      </text>
+                    );
+                  }}
+                  labelLine
+                >
+                  {borakBambooData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={
+                        [
+                          "#16a34a", // Base green
+                          "#15803d", // Slightly darker
+                          "#166534", // Darker
+                          "#14532d", // Even darker
+                          "#052e16", // Very dark
+                          "#052e16", // Darkest
+                        ][index % 6]
+                      }
+                    />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
             </ResponsiveContainer>
           </div>
         </CardContent>
@@ -382,223 +411,270 @@ const Dashboard = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>Muli bamboo Distribution Preference</CardTitle>
+          <CardTitle>Muli Bamboo Distribution Preference</CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="h-80">
+        <CardContent className="p-6">
+          <div className="h-[500px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={muliBambooData}
-                margin={{ top: 20, right: 30, left: 20, bottom: 40 }}
-              >
-                <XAxis
-                  dataKey="name"
-                  tickMargin={10}
-                  tick={{
-                    fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
-                  }}
-                >
-                  <Label
-                    value="Number of Pieces of Muli Bamboo"
-                    position="bottom"
-                    offset={10} // Distance from axis
-                    style={{
-                      textAnchor: "middle",
-                      fontSize: "14px",
-                      fill: "#0f172a",
-                    }}
-                  />
-                </XAxis>
-                <YAxis
-                  label={{
-                    value: "Percentage (%)",
-                    angle: -90,
-                    position: "insideLeft",
-                    fill: "#0f172a",
-                  }}
-                  tick={{
-                    fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
-                  }}
-                />
-                <Tooltip />
-                <Bar
+              <PieChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                <Pie
+                  data={muliBambooData}
                   dataKey="value"
-                  fill={COLORS.distribution.muli}
-                  label={renderCustomizedLabel}
-                />
-              </BarChart>
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={180}
+                  label={(props) => {
+                    const RADIAN = Math.PI / 180;
+                    const { cx, cy, midAngle, outerRadius, value, name } =
+                      props;
+                    const radius = outerRadius * 1.2;
+                    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+                    return (
+                      <text
+                        x={x}
+                        y={y}
+                        fill="#0f172a"
+                        style={{
+                          fontSize: 19,
+                          fontWeight: 700,
+                        }}
+                        textAnchor={x > cx ? "start" : "end"}
+                        dominantBaseline="central"
+                      >
+                        {`${name} pieces: ${value}%`}
+                      </text>
+                    );
+                  }}
+                  labelLine
+                >
+                  {muliBambooData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={
+                        [
+                          "#2563eb", // Base blue
+                          "#1d4ed8", // Slightly darker
+                          "#1e40af", // Darker
+                          "#1e3a8a", // Even darker
+                          "#172554", // Very dark
+                          "#0f172a", // Darkest
+                        ][index % 6]
+                      }
+                    />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
             </ResponsiveContainer>
           </div>
         </CardContent>
       </Card>
 
+      {/* Wire Distribution */}
       <Card>
         <CardHeader>
           <CardTitle>Wire Distribution Preference</CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="h-80">
+        <CardContent className="p-6">
+          <div className="h-[500px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={wireData}
-                margin={{ top: 20, right: 30, left: 20, bottom: 40 }}
-              >
-                <XAxis
-                  dataKey="name"
-                  tickMargin={10}
-                  tick={{
-                    fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
-                  }}
-                >
-                  <Label
-                    value="Wire (kg)"
-                    position="bottom"
-                    offset={10} // Distance from axis
-                    style={{
-                      textAnchor: "middle",
-                      fontSize: "14px",
-                      fill: "#0f172a",
-                    }}
-                  />
-                </XAxis>
-                <YAxis
-                  label={{
-                    value: "Percentage (%)",
-                    angle: -90,
-                    position: "insideLeft",
-                    fill: "#0f172a",
-                  }}
-                  tick={{
-                    fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
-                  }}
-                />
-                <Tooltip />
-                <Bar
+              <PieChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                <Pie
+                  data={wireData}
                   dataKey="value"
-                  fill={COLORS.distribution.wire}
-                  label={renderCustomizedLabel}
-                />
-              </BarChart>
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={180}
+                  label={(props) => {
+                    const RADIAN = Math.PI / 180;
+                    const { cx, cy, midAngle, outerRadius, value, name } =
+                      props;
+                    const radius = outerRadius * 1.2;
+                    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+                    return (
+                      <text
+                        x={x}
+                        y={y}
+                        fill="#0f172a"
+                        style={{
+                          fontSize: 19,
+                          fontWeight: 700,
+                        }}
+                        textAnchor={x > cx ? "start" : "end"}
+                        dominantBaseline="central"
+                      >
+                        {`${name} kg: ${value}%`}
+                      </text>
+                    );
+                  }}
+                  labelLine
+                >
+                  {wireData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={
+                        [
+                          "#8b5cf6", // Base purple
+                          "#7c3aed", // Slightly darker
+                          "#6d28d9", // Darker
+                          "#5b21b6", // Even darker
+                          "#4c1d95", // Very dark
+                          "#2e1065", // Darkest
+                        ][index % 6]
+                      }
+                    />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
             </ResponsiveContainer>
           </div>
         </CardContent>
       </Card>
 
+      {/* Rope Distribution */}
       <Card>
         <CardHeader>
           <CardTitle>Rope Distribution Preference</CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="h-80">
+        <CardContent className="p-6">
+          <div className="h-[500px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={ropeData}
-                margin={{ top: 20, right: 30, left: 20, bottom: 40 }}
-              >
-                <XAxis
-                  dataKey="name"
-                  tickMargin={10}
-                  tick={{
-                    fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
-                  }}
-                >
-                  <Label
-                    value="Rope (kg)"
-                    position="bottom"
-                    offset={10} // Distance from axis
-                    style={{
-                      textAnchor: "middle",
-                      fontSize: "14px",
-                      fill: "#0f172a",
-                    }}
-                  />
-                </XAxis>
-                <YAxis
-                  label={{
-                    value: "Percentage (%)",
-                    angle: -90,
-                    position: "insideLeft",
-                    fill: "#0f172a",
-                  }}
-                  tick={{
-                    fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
-                  }}
-                />
-                <Tooltip />
-                <Bar
+              <PieChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                <Pie
+                  data={ropeData}
                   dataKey="value"
-                  fill={COLORS.distribution.rope}
-                  label={renderCustomizedLabel}
-                />
-              </BarChart>
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={180}
+                  label={(props) => {
+                    const RADIAN = Math.PI / 180;
+                    const { cx, cy, midAngle, outerRadius, value, name } =
+                      props;
+                    const radius = outerRadius * 1.2;
+                    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+                    return (
+                      <text
+                        x={x}
+                        y={y}
+                        fill="#0f172a"
+                        style={{
+                          fontSize: 19,
+                          fontWeight: 700,
+                        }}
+                        textAnchor={x > cx ? "start" : "end"}
+                        dominantBaseline="central"
+                      >
+                        {`${name} kg: ${value}%`}
+                      </text>
+                    );
+                  }}
+                  labelLine
+                >
+                  {ropeData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={
+                        [
+                          "#ea580c", // Base orange
+                          "#c2410c", // Slightly darker
+                          "#9a3412", // Darker
+                          "#7c2d12", // Even darker
+                          "#431407", // Very dark
+                          "#270a04", // Darkest
+                        ][index % 6]
+                      }
+                    />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
             </ResponsiveContainer>
           </div>
         </CardContent>
       </Card>
 
+      {/* Sandbag Distribution */}
       <Card>
         <CardHeader>
           <CardTitle>Sandbag Distribution Preference</CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="h-80">
+        <CardContent className="p-6">
+          <div className="h-[500px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={sandbagData}
-                margin={{ top: 20, right: 30, left: 20, bottom: 40 }}
-              >
-                <XAxis
-                  dataKey="name"
-                  tickMargin={10}
-                  tick={{
-                    fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
-                  }}
-                >
-                  <Label
-                    value="Sandbag (nos)"
-                    position="bottom"
-                    offset={10} // Distance from axis
-                    style={{
-                      textAnchor: "middle",
-                      fontSize: "14px",
-                      fill: "#0f172a",
-                    }}
-                  />
-                </XAxis>
-                <YAxis
-                  label={{
-                    value: "Percentage (%)",
-                    angle: -90,
-                    position: "insideLeft",
-                    fill: "#0f172a",
-                  }}
-                  tick={{
-                    fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
-                  }}
-                />
-                <Tooltip />
-                <Bar
+              <PieChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                <Pie
+                  data={sandbagData}
                   dataKey="value"
-                  fill={COLORS.distribution.sandbag}
-                  label={renderCustomizedLabel}
-                />
-              </BarChart>
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={180}
+                  label={(props) => {
+                    const RADIAN = Math.PI / 180;
+                    const {
+                      cx,
+                      cy,
+                      midAngle,
+                      innerRadius,
+                      outerRadius,
+                      startAngle,
+                      endAngle,
+                      fill,
+                      payload,
+                      percent,
+                      value,
+                      name,
+                    } = props;
+                    const radius = outerRadius * 1.2;
+                    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+                    return (
+                      <text
+                        x={x}
+                        y={y}
+                        fill="#0f172a"
+                        style={{
+                          fontSize: 19,
+                          fontWeight: 700,
+                        }}
+                        textAnchor={x > cx ? "start" : "end"}
+                        dominantBaseline="central"
+                      >
+                        {`${name} nos: ${value}%`}
+                      </text>
+                    );
+                  }}
+                  labelLine
+                >
+                  {sandbagData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={
+                        [
+                          "#db2777", // Base pink
+                          "#be185d", // Slightly darker
+                          "#9d174d", // Darker
+                          "#831843", // Even darker
+                          "#500724", // Very dark
+                          "#4a044e", // Darkest
+                        ][index % 6]
+                      }
+                    />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
             </ResponsiveContainer>
           </div>
         </CardContent>
@@ -611,17 +687,42 @@ const Dashboard = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-96">
+          <div className="h-[500px]">
             <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={durableData}
+              <BarChart data={durableData} margin={{ bottom: 30, left: 70 }}>
+                <XAxis
+                  dataKey="name"
+                  angle={-30}
+                  textAnchor="end"
+                  height={100}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "19px",
+                    fontWeight: 700,
+                  }}
+                  interval={0}
+                />
+                <YAxis
+                  label={{
+                    value: "Percentage (%)",
+                    angle: -90,
+                    position: "insideLeft",
+                    fill: "#0f172a",
+                    fontSize: "17px",
+                    fontWeight: 700,
+                  }}
+                  tick={{
+                    fill: "#0f172a",
+                    fontSize: "19px",
+                    fontWeight: 700,
+                  }}
+                  padding={{ top: 20 }}
+                />
+                <Tooltip />
+                <Bar
                   dataKey="value"
-                  nameKey="name"
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={120}
-                  label={({ name, value }) => `${name}: ${value}%`}
+                  fill={COLORS.primary}
+                  label={renderCustomizedLabel}
                 >
                   {durableData.map((entry, index) => (
                     <Cell
@@ -629,10 +730,8 @@ const Dashboard = () => {
                       fill={COLORS.pieColors[index % COLORS.pieColors.length]}
                     />
                   ))}
-                </Pie>
-                <Tooltip />
-                <Legend />
-              </PieChart>
+                </Bar>
+              </BarChart>
             </ResponsiveContainer>
           </div>
         </CardContent>
@@ -646,15 +745,15 @@ const Dashboard = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-80">
+          <div className="h-[500px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={householdToolkitData}>
                 <XAxis
                   dataKey="name"
                   tick={{
                     fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
+                    fontSize: "19px",
+                    fontWeight: 700,
                   }}
                 />
                 <YAxis
@@ -663,11 +762,13 @@ const Dashboard = () => {
                     angle: -90,
                     position: "insideLeft",
                     fill: "#0f172a",
+                    fontSize: "17px",
+                    fontWeight: 700,
                   }}
                   tick={{
                     fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
+                    fontSize: "19px",
+                    fontWeight: 700,
                   }}
                 />
                 <Tooltip />
@@ -688,15 +789,15 @@ const Dashboard = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-80">
+          <div className="h-[500px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={communityToolkitData}>
                 <XAxis
                   dataKey="name"
                   tick={{
                     fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
+                    fontSize: "19px",
+                    fontWeight: 700,
                   }}
                 />
                 <YAxis
@@ -705,11 +806,13 @@ const Dashboard = () => {
                     angle: -90,
                     position: "insideLeft",
                     fill: "#0f172a",
+                    fontSize: "17px",
+                    fontWeight: 700,
                   }}
                   tick={{
                     fill: "#0f172a",
-                    fontSize: "12px",
-                    fontWeight: 500,
+                    fontSize: "19px",
+                    fontWeight: 700,
                   }}
                 />
                 <Tooltip />
